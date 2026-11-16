@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Attendance System - Project Gallery</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f6f9;
+      color: #1e293b;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      color: #475569;
+      margin-bottom: 35px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+    .card h3 {
+      margin: 0 0 14px 0;
+      font-size: 1.1rem;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .btn {
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-download {
+      background-color: #2563eb;
+      color: white;
+    }
+    .btn-download:hover {
+      background-color: #1d4ed8;
+    }
+    .btn-view {
+      background-color: #e2e8f0;
+      color: #0f172a;
+    }
+    .btn-view:hover {
+      background-color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Smart Attendance System</h1>
+  <p class="subtitle">Project Display Diagrams — Full Resolution Printables</p>
+
+  <div class="grid" id="gallery"></div>
+
+  <script>
+    const gallery = document.getElementById('gallery');
+    const extensions = ['png', 'jpg', 'jpeg', 'webp'];
+
+    for (let i = 1; i <= 8; i++) {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const top = document.createElement('div');
+      const title = document.createElement('h3');
+      title.textContent = `Image ${i}`;
+
+      const img = document.createElement('img');
+      img.alt = `Image ${i}`;
+
+      const actions = document.createElement('div');
+      actions.className = 'actions';
+
+      const viewBtn = document.createElement('a');
+      viewBtn.target = '_blank';
+      viewBtn.className = 'btn btn-view';
+      viewBtn.textContent = 'Open Full Size';
+
+      const dlBtn = document.createElement('a');
+      dlBtn.className = 'btn btn-download';
+      dlBtn.textContent = 'Download';
+
+      let extIndex = 0;
+      function setFileSource(ext) {
+        const fileName = `image${i}.${ext}`;
+        img.src = fileName;
+        viewBtn.href = fileName;
+        dlBtn.href = fileName;
+        dlBtn.download = fileName;
+      }
+
+      img.onerror = function() {
+        extIndex++;
+        if (extIndex < extensions.length) {
+          setFileSource(extensions[extIndex]);
+        }
+      };
+
+      setFileSource(extensions[0]);
+
+      top.appendChild(title);
+      top.appendChild(img);
+      actions.appendChild(viewBtn);
+      actions.appendChild(dlBtn);
+      card.appendChild(top);
+      card.appendChild(actions);
+      gallery.appendChild(card);
+    }
+  </script>
+
+</body>
+</html>
